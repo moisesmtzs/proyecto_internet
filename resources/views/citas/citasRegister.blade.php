@@ -1,5 +1,5 @@
 <x-plantilla titulo="Agendar cita">
-<body>
+
     <div class="mt-3 container">
         <a class="m-auto p-auto btn btn-primary" href="/cita">Regresar</a>
         <br>
@@ -24,6 +24,5 @@
         </form>
 
     </div>
-
     
 </x-plantilla>
