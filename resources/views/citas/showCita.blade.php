@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Usuario</title>
-</head>
-<body>
+<x-plantilla titulo="Detalles de la cita">
     
-    <h1>Detalles de la Cita</h1>
-    <a href="/cita">Lista de citas</a>
+    <div class="container mt-3">
+        <a class="btn btn-primary" href="/cita">Volver a la lista de citas</a>
 
-    <h2>{{ $cita->fecha }}</h2>
-    <h2>{{ $cita->hora }}</h2>
-    
-    <a href="/cita/{{$cita->id}}/edit">Editar cita</a>
-    <br>
-    <br>
-    <form action="/cita/{{$cita->id}}" method="post">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Eliminar cita</button>
-    </form>
+        <div class="container my-5 md-mx-5">
+            <h4 class="text-dark">Fecha de la cita: {{ $cita->fecha }}</h4>
+            <h4 class="text-dark">Hora de la cita: {{ $cita->hora }}</h4>
+        </div>
+        
+        <br>
+        <a class="btn btn-info" href="/cita/{{ $cita->id }}/edit">Editar cita</a>
+        <br>
+        <br>
+        <form action="/cita/{{$cita->id}}" method="post">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger" type="submit">Eliminar cita</button>
+        </form>
+    </div>
 
-</body>
-</html>
+</x-plantilla>

@@ -4,8 +4,8 @@
     <div class="container-md md:table-auto table w-full bg-slate-800 rounded-md">
         <div class="container px-10 table-header-group content-center">
             <div class="table-row m-20">
-                <div class="table-cell text-left text-white text-center">Fecha</div>
-                <div class="table-cell text-left text-white text-center">Hora</div>
+                <div class="table-cell text-left text-white text-center fs-5 fw-bold">Fecha</div>
+                <div class="table-cell text-left text-white text-center fs-5 fw-bold">Hora</div>
             </div>
         </div>
         @foreach($citas as $cita)
@@ -13,11 +13,11 @@
             <!-- <td>
                     <a href="/cita/{{ $cita->id }}">{{ $cita->id }}</a>
                 </td> -->
-            <div class="table-row">
-                <div class="table-cell text-left text-white">
-                    <a href="/cita/{{ $cita->id }}">{{ $cita->fecha }}</a>
+            <div class="table-row text-start">
+                <div class="table-cell">
+                    <a class="btn btn-light text-dark" href="/cita/{{ $cita->id }}">{{ $cita->fecha }}</a>
                 </div>
-                <div class="table-cell text-left text-white">{{ $cita->hora }}</div>
+                <div class="table-cell text-white">{{ $cita->hora }}</div>
             </div>
         </div>
         @endforeach
