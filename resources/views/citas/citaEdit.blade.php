@@ -13,7 +13,7 @@
             <br>
     
             <label for="hora">Hora: </label>
-            <input class="form-control" type="text" name="hora" id="" value="{{ $cita['hora'] }}">
+            <input class="form-control" type="time" name="hora" id="" value="{{ $cita['hora'] }}">
             <br>
     
             <input class="btn btn-primary" type="submit" value="Guardar cambios">

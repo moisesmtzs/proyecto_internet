@@ -14,7 +14,7 @@
                 </div>
                 <div class="col">
                     <label for="hora">Hora: </label>
-                    <input class="form-control" type="text" name="hora" id="">
+                    <input class="form-control" type="time" name="hora" id="">
 
                 </div>
                 <div>

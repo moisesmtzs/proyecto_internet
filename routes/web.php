@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('user', UserController::class);
+// Route::resource('user', UserController::class);
 Route::resource('cita', CitaController::class);
 Route::middleware([
     'auth:sanctum',
