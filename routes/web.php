@@ -20,7 +20,10 @@ Route::get('/', function () {
 });
 
 // Route::resource('user', UserController::class);
-Route::resource('cita', CitaController::class);
+Route::resource('cita', CitaController::class)->middleware('auth')->parameters([
+    'cita' => 'cita'
+]);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
