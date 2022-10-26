@@ -1,11 +1,11 @@
 <x-plantilla titulo="Listado de Citas">
 
     <br>
-    <div class="container-md md:table-auto table w-full bg-slate-800 rounded-md">
+    <div class="container-md md:table-auto table w-50 bg-slate-800 rounded-md">
         <div class="container px-10 table-header-group content-center">
             <div class="table-row m-20">
-                <div class="table-cell text-left text-white text-center fs-5 fw-bold">Fecha</div>
-                <div class="table-cell text-left text-white text-center fs-5 fw-bold">Hora</div>
+                <div class="table-cell text-left text-white text-center fs-4 fw-bold">Fecha</div>
+                <div class="table-cell text-left text-white text-center fs-4 fw-bold">Hora</div>
             </div>
         </div>
         @foreach($citas as $cita)
