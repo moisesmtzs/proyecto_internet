@@ -25,5 +25,8 @@
     <div class="container">
         <a type="button" class="btn btn-primary" href="/cita/create">Agendar cita</a>
     </div>
+    <div class="container">
+        <a type="button" class="btn btn-outline-dark mt-3 flex items-center" href="/dashboard">Ir a Dashboard</a>
+    </div>
 
 </x-plantilla>

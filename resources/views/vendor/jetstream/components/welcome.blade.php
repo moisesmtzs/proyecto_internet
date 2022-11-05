@@ -1,3 +1,16 @@
+
+
+<div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+    <div>
+        <x-jet-application-logo class="block h-12 w-auto" />
+    </div>
+
+    <div class="mt-8 text-2xl fw-bold">Página de Inicio</div>
+    <!-- <div class="mt-6 text-2xl"> -->
+    <a type="button" class="mt-3 flex items-center text-sm font-semibold text-indigo-700" href="/cita">Navegar a crud de citas</a>
+    <!-- </div> -->
+</div>
+
 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
     <div>
         <x-jet-application-logo class="block h-12 w-auto" />
