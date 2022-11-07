@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cita;
+use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,7 @@ class CitaController extends Controller
      */
     public function index()
     {
-        $citas = Cita::all();
+        $citas = Auth::user()->citas;
         return view('citas/citasIndex', compact('citas'));
     }
 
@@ -26,7 +27,8 @@ class CitaController extends Controller
      */
     public function create()
     {
-        return view('citas/citasRegister');
+        $servicios = Servicio::all();
+        return view('citas/citasRegister', compact('servicios'));
     }
 
     /**
@@ -38,11 +40,15 @@ class CitaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'fecha' => 'required|date',
+            'fecha' => 'required|date|after:today',
             'hora' => 'required',
         ]);
         $request->merge(['user_id' => Auth::id()]);
-        Cita::create($request->all());
+        
+        $cita = Cita::create($request->all());
+
+        $cita->servicios()->attach($request->servicios_id);
+
         return redirect('/cita');
     }
 
@@ -78,7 +84,7 @@ class CitaController extends Controller
     public function update(Request $request, Cita $cita)
     {
         $request->validate([
-            'fecha' => 'required|date',
+            'fecha' => 'required|date|after:today',
             'hora' => 'required'
         ]);
         $cita->fecha = $request->fecha;

@@ -19,16 +19,29 @@
             </tbody>
 
         </table>
+        <div class="container-md md:table-auto w-50 bg-slate-600 rounded-md md-mx-5">
+            <p class="text-center text-white fs-5">Servicios</p>
+        </div>
         <table class="table table-striped-columns container-md md:table-auto w-50 bg-slate-800 rounded-md md-mx-5">
 
             <thead class="text-center">
                 <tr>
-                    <th class="text-white fs-5">Servicios</th>
+                </tr>
+                <tr>
+                    <th class="fw-semibold text-white">Nombre del servicio</td>
+                    <th class="fw-semibold text-white">Precio del servicio</td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="fw-light text-white">Aqui van los detalles de los servicios en la cita (Relacion de N:M)</td>
+                    @if ($cita->servicios->isNotEmpty())
+                        @foreach ($cita->servicios as $servicio)
+                            <td class="fw-light text-white">{{ $servicio->nombre }}</td>
+                            <td class="fw-light text-white">${{ number_format($servicio->precio, 2) }}</td>
+                            @endforeach
+                    @else
+                        <td class="fw-light text-white">No hay servicios contratados para esta cita.</td>
+                    @endif
                 </tr>
             </tbody>
 
