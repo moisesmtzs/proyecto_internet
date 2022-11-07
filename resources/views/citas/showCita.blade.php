@@ -33,16 +33,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    @if ($cita->servicios->isNotEmpty())
-                        @foreach ($cita->servicios as $servicio)
+                @if ($cita->servicios->isNotEmpty())
+                    @foreach ($cita->servicios as $servicio)
+                        <tr>
                             <td class="fw-light text-white">{{ $servicio->nombre }}</td>
                             <td class="fw-light text-white">${{ number_format($servicio->precio, 2) }}</td>
-                            @endforeach
-                    @else
+                        </tr>
+                        @endforeach
+                @else
+                    <tr>
                         <td class="fw-light text-white">No hay servicios contratados para esta cita.</td>
-                    @endif
-                </tr>
+                        <td class="fw-light text-white">No hay servicios contratados para esta cita.</td>
+                    </tr>
+                @endif
             </tbody>
 
         </table>
