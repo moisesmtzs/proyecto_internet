@@ -17,7 +17,8 @@ class CitaController extends Controller
     public function index()
     {
         $citas = Auth::user()->citas;
-        return view('citas/citasIndex', compact('citas'));
+        $user = Auth::user();
+        return view('citas/citasIndex', compact('citas', 'user'));
     }
 
     /**
