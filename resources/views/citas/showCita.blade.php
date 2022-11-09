@@ -1,7 +1,7 @@
 <x-plantilla titulo="Detalles de la cita">
     
     <div class="container mt-3">
-        <a class="btn btn-primary" href="/cita">Volver a la lista de citas</a>
+        {{-- <a class="btn btn-primary" href="/cita">Volver a la lista de citas</a> --}}
 
         <table class="table table-striped-columns container-md md:table-auto w-50 bg-slate-800 rounded-md my-5 md-mx-5">
 
@@ -51,7 +51,7 @@
         </table>
     
         <br>
-        <a class="btn btn-info fw-bold" href="/cita/{{ $cita->id }}/edit">Editar cita</a>
+        <a class="btn btn-secondary fw-bold" href="/cita/{{ $cita->id }}/edit">Editar cita</a>
         <br>
         <br>
         <form action="/cita/{{$cita->id}}" method="post">
