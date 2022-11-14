@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Cita;
 use App\Models\Team;
+use App\Models\User;
+use App\Policies\CitaPolicy;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -15,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Team::class => TeamPolicy::class,
+        Cita::class => CitaPolicy::class,
     ];
 
     /**
@@ -26,6 +31,29 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('update-cita', function(User $user, Cita $cita) {
+            if ( $user->admin ) {
+                return true;
+            } else {
+                return $user->id === $cita->user_id;
+            }
+        });
+
+        Gate::define('view-servicio', function(User $user) {
+            if ( $user->admin ) {
+                return true;
+            }
+        });
+        Gate::define('add-servicio', function(User $user) {
+            if ( $user->admin ) {
+                return true;
+            }
+        });
+        Gate::define('update-servicio', function(User $user) {
+            if ( $user->admin ) {
+                return true;
+            }
+        });
+        
     }
 }

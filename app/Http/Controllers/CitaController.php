@@ -6,6 +6,7 @@ use App\Models\Cita;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CitaController extends Controller
 {
@@ -16,8 +17,14 @@ class CitaController extends Controller
      */
     public function index()
     {
-        $citas = Auth::user()->citas;
         $user = Auth::user();
+        if ( $user->admin ) {
+            $citas = Cita::all();
+            // $citas = Cita::with('getUser')->get();
+        } else {
+            $citas = Auth::user()->citas;
+            // $citas = Cita::with('getUser')->get();
+        }
         return view('citas/citasIndex', compact('citas', 'user'));
     }
 
@@ -61,6 +68,7 @@ class CitaController extends Controller
      */
     public function show(Cita $cita)
     {
+        $this->authorize('view', $cita);
         return view('citas/showCita', compact('cita'));
     }
 
@@ -72,7 +80,14 @@ class CitaController extends Controller
      */
     public function edit(Cita $cita)
     {
-        return view('citas/citaEdit', compact('cita'));
+        if ( !Gate::allows('update-cita', $cita) ) {
+            abort(401);
+        }
+
+        $servicios = Servicio::all();
+        // $servicios = Servicio::with('citas')->get();
+
+        return view('citas/citaEdit', compact('cita', 'servicios'));
     }
 
     /**
@@ -90,6 +105,7 @@ class CitaController extends Controller
         ]);
         $cita->fecha = $request->fecha;
         $cita->hora = $request->hora;
+        $cita->servicios()->attach($request->servicios_id);
         $cita->save();
         return view('citas/showCita', compact('cita'));
     }
@@ -102,6 +118,8 @@ class CitaController extends Controller
      */
     public function destroy(Cita $cita)
     {
+        $this->authorize('delete', $cita);
+        $cita->servicios()->detach();
         $cita->delete();
         return redirect('/cita');
     }

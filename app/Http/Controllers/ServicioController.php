@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Servicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ServicioController extends Controller
 {
@@ -14,7 +16,12 @@ class ServicioController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        if ( !Gate::allows('view-servicio', $user) ) {
+            abort(401);
+        }
+        $servicios = Servicio::all();
+        return view('servicios.serviciosIndex', compact('servicios'));
     }
 
     /**
@@ -24,7 +31,11 @@ class ServicioController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        if ( !Gate::allows('add-servicio', $user) ) {
+            abort(401);
+        }
+        return view('servicios/addServicio');
     }
 
     /**
@@ -35,7 +46,17 @@ class ServicioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        if ( !Gate::allows('add-servicio', $user) ) {
+            abort(401);
+        }
+        $request->validate([
+            'nombre' => 'required|min:10|string',
+            'precio' => 'required|min:0|numeric',
+        ]);
+        Servicio::create($request->all());
+
+        return redirect('/servicio');
     }
 
     /**
@@ -46,7 +67,11 @@ class ServicioController extends Controller
      */
     public function show(Servicio $servicio)
     {
-        //
+        $user = Auth::user();
+        if ( !Gate::allows('view-servicio', $user) ) {
+            abort(401);
+        }
+        return view('servicios/showServicio', compact('servicio'));
     }
 
     /**
@@ -57,7 +82,12 @@ class ServicioController extends Controller
      */
     public function edit(Servicio $servicio)
     {
-        //
+        $user = Auth::user();
+        if ( !Gate::allows('update-servicio', $user) ) {
+            abort(401);
+        }
+        return view('servicios/editServicio', compact('servicio'));
+        
     }
 
     /**
@@ -69,7 +99,18 @@ class ServicioController extends Controller
      */
     public function update(Request $request, Servicio $servicio)
     {
-        //
+        $user = Auth::user();
+        if ( !Gate::allows('update-servicio', $user) ) {
+            abort(401);
+        }
+        $request->validate([
+            'nombre' => 'required|min:10|string',
+            'precio' => 'required|min:0|numeric',
+        ]);
+        $servicio->nombre = $request->nombre;
+        $servicio->precio = $request->precio;
+        $servicio->save();
+        return view('servicios/showServicio', compact('servicio'));
     }
 
     /**
@@ -80,6 +121,7 @@ class ServicioController extends Controller
      */
     public function destroy(Servicio $servicio)
     {
-        //
+        $servicio->delete();
+        return redirect('/servicio');
     }
 }

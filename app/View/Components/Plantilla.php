@@ -8,14 +8,16 @@ class Plantilla extends Component
 {
     
     public $titulo;
+    public $nombrePagina;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($titulo)
+    public function __construct($nombrePagina, $titulo)
     {
+        $this->nombrePagina = $nombrePagina;
         $this->titulo = $titulo;
     }
 

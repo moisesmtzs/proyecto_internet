@@ -1,7 +1,7 @@
-<x-plantilla titulo="Agendar cita">
+<x-plantilla nombrePagina="Agenda de cita" titulo="Agendar cita">
 
     <div class="mt-3 container">
-        <a class="m-auto p-auto btn btn-secondary" href="/cita">Regresar</a>
+        <a class="m-auto p-auto btn btn-outline-dark" href="/cita">Regresar</a>
         <br>
         <br>
 
@@ -21,12 +21,10 @@
                 <div class="col">
                     <label class="fs-4 fw-bold" for="fecha">Fecha: </label>
                     <input class="form-control" type="date" name="fecha" value="{{ old('fecha')}}" id="">
-
                 </div>
                 <div class="col">
                     <label class="fs-4 fw-bold" for="hora">Hora: </label>
                     <input class="form-control" type="time" name="hora" value="{{ old('hora')}}" id="">
-
                 </div>
             </div>
             <div class="container mt-3">
@@ -38,7 +36,7 @@
                 </select>
             </div>
             <div>
-                <button class="mt-4 px-3 btn btn-primary" type="submit">Enviar</button>
+                <button class="mt-4 px-3 btn btn-dark" type="submit">Enviar</button>
             </div>
         </form>
 
