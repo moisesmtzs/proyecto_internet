@@ -20,6 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/downloadArchivo/{archivo}', function () {
+    return view('welcome');
+});
+
+
 // Route::resource('user', UserController::class);
 Route::resource('cita', CitaController::class)->middleware('auth')->parameters([
     'cita' => 'cita'

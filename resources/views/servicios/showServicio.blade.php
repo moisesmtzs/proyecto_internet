@@ -23,6 +23,13 @@
             </tbody>
 
         </table>
+        <div class="table table-striped-columns container-md md:table-auto w-75 bg-slate-800 rounded-md md-mx-5">
+            @foreach ($servicio->archivos as $archivo)
+                <a href="{{ route('downloadFile'), $archivo }}" class="text-center text-white fs-5 my-4">{{ $archivo->nombre_original }}</a>
+                <img src="{{ \Storage::url($archivo->ubicacion) }}" />
+            @endforeach
+        </div>
+
         <a class="my-3 btn btn-dark fw-bold" href="/servicio/{{ $servicio->id }}/edit">Editar servicio</a>
         <form action="/servicio/{{$servicio->id}}" method="post">
             @csrf

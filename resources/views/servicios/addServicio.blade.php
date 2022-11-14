@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        <form action="/servicio" method="post">
+        <form action="/servicio" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row w-50">
                 <div class="col">
@@ -25,6 +25,11 @@
                     <input class="form-control" type="number" name="precio" value="{{ old('nombre') }}">
                 </div>
             </div>
+
+            <div class="my-2 w-25">
+                <input class="form-control" type="file" name="archivo" id="">
+            </div>
+
             <button class="mt-4 px-3 btn btn-dark" type="submit">Agregar</button>
         </form>
 
