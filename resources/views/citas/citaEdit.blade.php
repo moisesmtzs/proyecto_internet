@@ -32,8 +32,8 @@
                 <ul class="list-group">
                     @foreach ($cita->servicios as $servicio)
                         <li class="mx-2 list-group-item list-group-item-dark fw-semibold w-50" value="{{ $servicio->id }}">
-                            <input class="form-check-input me-1" type="checkbox" value="{{ $servicio->id }}" id="servicioCheckBox">
-                            <label class="form-check-label" for="servicioCheckBox">{{ $servicio->nombre }}</label>
+                            {{-- <input class="form-check-input me-1" type="checkbox" value="{{ $servicio->id }}" id="servicioCheckBox"> --}}
+                            <label class="form-check-label">{{ $servicio->nombre }}</label>
                         </li>
                     @endforeach
                 </ul>

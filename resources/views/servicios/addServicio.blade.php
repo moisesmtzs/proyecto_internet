@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        <form action="/servicio" method="post">
+        <form action="/servicio" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row w-50">
                 <div class="col">
