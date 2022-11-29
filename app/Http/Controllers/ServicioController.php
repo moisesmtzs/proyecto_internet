@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archivo;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class ServicioController extends Controller
 {
@@ -54,7 +56,15 @@ class ServicioController extends Controller
             'nombre' => 'required|min:10|string',
             'precio' => 'required|min:0|numeric',
         ]);
-        Servicio::create($request->all());
+        $servicio = Servicio::create($request->all());
+
+        if ( $request->file('archivo')->isValid() ) {
+            $ubi = $request->archivo->store('servicios');
+            $archivo = new Archivo();
+            $archivo->ubicacion = $ubi;
+            $archivo->nombre_original = $request->archivo->getClientOriginalName();
+            $servicio->archivos()->save($archivo);
+        }
 
         return redirect('/servicio');
     }
@@ -124,4 +134,9 @@ class ServicioController extends Controller
         $servicio->delete();
         return redirect('/servicio');
     }
+
+    public function downloadFile(Archivo $archivo) {
+        return Storage::download($archivo->ubicacion);
+    }
+
 }

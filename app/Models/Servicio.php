@@ -18,4 +18,9 @@ class Servicio extends Model
         return $this->belongsToMany(Cita::class);
     }
 
+    public function archivos()
+    {
+        return $this->hasMany(Archivo::class);
+    }
+
 }
