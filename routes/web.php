@@ -24,6 +24,7 @@ Route::get('/downloadArchivo/{archivo}', function () {
     return view('welcome');
 });
 
+Route::get('/delete', [ServicioController::class, 'deleteFile']);
 
 // Route::resource('user', UserController::class);
 Route::resource('cita', CitaController::class)->middleware('auth')->parameters([

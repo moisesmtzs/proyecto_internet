@@ -57,7 +57,7 @@ class CitaController extends Controller
 
         $cita->servicios()->attach($request->servicios_id);
 
-        return redirect('/cita');
+        return redirect('/cita')->with('message', 'Cita creada correctamente');
     }
 
     /**
@@ -121,6 +121,6 @@ class CitaController extends Controller
         $this->authorize('delete', $cita);
         $cita->servicios()->detach();
         $cita->delete();
-        return redirect('/cita');
+        return redirect('/cita')->with('message', 'Cita eliminada correctamente');
     }
 }

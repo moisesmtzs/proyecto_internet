@@ -1,4 +1,9 @@
 <x-plantilla nombrePagina="Listado de servicios" titulo="Servicios">
+
+    @if (session('message'))
+        <div class="alert alert-success">{{ session('message') }}</div>
+    @endif
+
     <div class="mt-3 container-md md:table-auto table w-50 bg-slate-800 rounded-md">
         <div class="container px-10 table-header-group content-center">
             <div class="table-row m-20">

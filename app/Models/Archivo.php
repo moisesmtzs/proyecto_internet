@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Archivo extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre_original'];
+    protected $fillable = ['nombre_original', 'ubicacion'];
 
     public function servicio() {
         return $this->belongsTo(Servicio::class);

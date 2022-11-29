@@ -1,5 +1,8 @@
 <x-plantilla nombrePagina="Ver servicio" titulo="Detalles del servicio">
     <div class="mt-3 container">
+        @if (session('message'))
+            <div class="alert alert-success">{{ session('message') }}</div>
+        @endif
         <a class="btn btn-outline-dark" href="{{ route('servicio.index') }}">Regresar a listado de servicios</a>
         <div class="container-md md:table-auto w-50 bg-slate-600 rounded-md md-mx-5">
             <p class="text-center text-white fs-5 my-4">Detalle del servicio</p>
@@ -23,10 +26,10 @@
             </tbody>
 
         </table>
-        <div class="table table-striped-columns container-md md:table-auto w-75 bg-slate-800 rounded-md md-mx-5">
+        <div class="text-center container-md w-75 rounded-md md-mx-5">
             @foreach ($servicio->archivos as $archivo)
-                <a href="{{ route('downloadFile'), $archivo }}" class="text-center text-white fs-5 my-4">{{ $archivo->nombre_original }}</a>
-                <img src="{{ \Storage::url($archivo->ubicacion) }}" />
+                {{-- <a href="{{ route('downloadFile'), $archivo }}" class="text-center text-white fs-5 my-4">{{ $archivo->nombre_original }}</a> --}}
+                <img src="{{ \Storage::url($archivo->ubicacion) }}" class="img-fluid rounded mx-auto d-block w-25"/>
             @endforeach
         </div>
 

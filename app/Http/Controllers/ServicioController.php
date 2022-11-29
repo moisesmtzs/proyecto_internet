@@ -59,14 +59,14 @@ class ServicioController extends Controller
         $servicio = Servicio::create($request->all());
 
         if ( $request->file('archivo')->isValid() ) {
-            $ubi = $request->archivo->store('servicios');
+            $ubi = $request->archivo->store('public');
             $archivo = new Archivo();
             $archivo->ubicacion = $ubi;
             $archivo->nombre_original = $request->archivo->getClientOriginalName();
             $servicio->archivos()->save($archivo);
         }
 
-        return redirect('/servicio');
+        return redirect('/servicio')->with('message', 'Servicio creado correctamente');
     }
 
     /**
@@ -119,7 +119,20 @@ class ServicioController extends Controller
         ]);
         $servicio->nombre = $request->nombre;
         $servicio->precio = $request->precio;
-        $servicio->save();
+        if ( $request->hasFile('archivo') ) {
+            foreach ($servicio->archivos() as $archivo) {
+                unlink($archivo->ubicacion);
+                Storage::delete($archivo->ubicacion);
+            }
+            $servicio->archivos()->delete();
+            $ubi = $request->archivo->store('public');
+            $archivo = new Archivo();
+            $archivo->ubicacion = $ubi;
+            $archivo->nombre_original = $request->archivo->getClientOriginalName();
+            $servicio->archivos()->save($archivo);
+        } else {
+            $servicio->save();
+        }
         return view('servicios/showServicio', compact('servicio'));
     }
 
@@ -130,13 +143,17 @@ class ServicioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Servicio $servicio)
-    {
+    {   
+        // Storage::delete($servicio->archivos());
+        // $servicio->archivos()->detach();
         $servicio->delete();
-        return redirect('/servicio');
+        return redirect('/servicio')->with('message', 'Servicio eliminado correctamente');
     }
 
-    public function downloadFile(Archivo $archivo) {
-        return Storage::download($archivo->ubicacion);
+    public function deleteFile(Archivo $archivo) {
+        unlink($archivo->ubicacion, $archivo->nombre_original);
+        $archivo->delete();
+        return redirect('/servicio');
     }
 
 }
